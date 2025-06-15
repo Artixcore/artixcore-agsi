@@ -1,4 +1,4 @@
-# ART Engine Bootstrap Manifest
+# ART Engine Manifest
 # Version: 0.1-alpha
 # Author: Ismam Tabriz Shams
 # Company: Artixcore LLC
@@ -10,66 +10,66 @@ project_root = {
     "type": "AGSI Runtime",
     "architecture": {
         "ethics": {
-            "language": "Python",
+            "language": ["C", "C++", "Rust"],
             "purpose": "Qur'anic logic tree, hadith-based rule engine",
             "modules": [
-                "taqwa_guard.py",
-                "sharia_law_tree.py",
-                "fiqh_interpreter.py",
-                "divine_filter_layer.py"
+                "taqwa_guard.cpp",
+                "sharia_law_tree.c",
+                "fiqh_interpreter.cpp",
+                "divine_filter_layer.rs"
             ]
         },
         "core_logic": {
-            "language": "Rust",
-            "purpose": "Fast, memory-safe reasoning core",
+            "language": ["Rust", "C++", "C"],
+            "purpose": "Ultra-fast, memory-optimized reasoning and control core",
             "modules": [
                 "kernel.rs",
-                "reasoning_engine.rs",
-                "logic_guard.rs"
+                "reasoning_engine.cpp",
+                "logic_guard.c"
             ]
         },
         "training_layer": {
-            "language": "Python",
-            "frameworks": ["PyTorch", "TensorFlow", "Transformers"],
-            "purpose": "Train AGI with Islamic aligned datasets",
+            "language": ["C", "C++", "Rust"],
+            "frameworks": ["CustomHardwareML", "TensorsDirect"],
+            "purpose": "Train AGI with Islamic aligned datasets on embedded-grade infrastructure",
             "datasets": [
-                "quran_nlp_corpus.json",
-                "hadith_sahih_bukhari.json",
+                "quran_nlp_corpus.bin",
+                "hadith_sahih_bukhari.dat",
                 "tafsir_annotated.txt"
             ]
         },
         "distributed_backend": {
-            "language": "Go",
-            "purpose": "Cloud-scale coordination and API layer",
+            "language": ["C", "Rust"],
+            "purpose": "Low-latency, hardware-tier API control system",
             "services": [
-                "ethics_validator_service.go",
-                "auth_ijazah.go",
-                "wisdom_inference_api.go"
+                "ethics_validator_service.rs",
+                "auth_ijazah.c",
+                "wisdom_inference_api.cpp"
             ]
         },
         "messaging": {
-            "language": "Elixir",
-            "platform": "BEAM",
-            "purpose": "Fault-tolerant messaging, consensus module",
+            "language": ["C", "Rust"],
+            "platform": "Baremetal + RTOS",
+            "purpose": "Real-time fault-tolerant messaging at hardware-grade reliability",
             "modules": [
-                "shura_node.ex",
-                "fatwa_broker.ex"
+                "shura_node.rs",
+                "fatwa_broker.c"
             ]
         },
         "hardware_integration": {
-            "language": "Zig",
+            "language": ["C", "Zig"],
             "purpose": "Connect AGI to embedded khadim systems (robots, UAVs)",
             "drivers": [
-                "vision_input.zig",
+                "vision_input.c",
                 "motion_control.zig",
-                "sensor_shield.zig"
+                "sensor_shield.c"
             ]
         }
     },
     "future_extension": {
         "ARTLang": {
             "status": "Design Phase",
-            "inspired_by": ["Rust", "Python", "C++", "Quranic logic"],
+            "inspired_by": ["Rust", "C++", "C", "Quranic logic"],
             "goal": "Native ethical language for AGSI with Islamic soul and compiler-enforced Taqwa"
         }
     }
