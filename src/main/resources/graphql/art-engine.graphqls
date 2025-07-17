@@ -1,0 +1,119 @@
+type Query {
+    engineStatus: EngineStatus!
+    engineMetrics: EngineMetrics!
+    chatHistory(sessionId: String!): [ChatMessage!]!
+}
+
+type Mutation {
+    chatCompletion(input: ChatInput!): ChatResponse!
+    generateImage(input: ImageInput!): ImageResponse!
+    analyzeText(input: TextAnalysisInput!): TextAnalysisResponse!
+    processData(input: DataProcessingInput!): DataProcessingResponse!
+}
+
+type Subscription {
+    chatStream(sessionId: String!): ChatChunk!
+    imageProgress(requestId: String!): ImageProgress!
+}
+
+type EngineStatus {
+    engine: String!
+    version: String!
+    status: String!
+    capabilities: [String!]!
+    uptime: Long!
+}
+
+type EngineMetrics {
+    totalRequests: Long!
+    successfulRequests: Long!
+    failedRequests: Long!
+    successRate: Float!
+    requestsByType: [RequestTypeMetric!]!
+}
+
+type RequestTypeMetric {
+    type: String!
+    count: Long!
+}
+
+input ChatInput {
+    message: String!
+    model: String = "ollama"
+    sessionId: String
+    temperature: Float = 0.7
+}
+
+type ChatResponse {
+    success: Boolean!
+    response: String
+    model: String!
+    timestamp: Long!
+    error: String
+}
+
+type ChatMessage {
+    id: String!
+    message: String!
+    response: String!
+    timestamp: Long!
+}
+
+type ChatChunk {
+    content: String!
+    done: Boolean!
+    timestamp: Long!
+}
+
+input ImageInput {
+    prompt: String!
+    style: String = "realistic"
+    width: Int = 512
+    height: Int = 512
+    format: String = "png"
+}
+
+type ImageResponse {
+    success: Boolean!
+    imageUrl: String
+    prompt: String!
+    timestamp: Long!
+    error: String
+}
+
+type ImageProgress {
+    progress: Int!
+    status: String!
+    timestamp: Long!
+}
+
+input TextAnalysisInput {
+    text: String!
+    analysisTypes: [String!]
+    language: String = "en"
+}
+
+type TextAnalysisResponse {
+    success: Boolean!
+    analysis: String
+    textLength: Int!
+    timestamp: Long!
+    error: String
+}
+
+input DataProcessingInput {
+    data: JSON!
+    operation: String!
+    parameters: JSON
+}
+
+type DataProcessingResponse {
+    success: Boolean!
+    processedData: JSON
+    operation: String!
+    timestamp: Long!
+    error: String
+}
+
+scalar JSON
+scalar Long
