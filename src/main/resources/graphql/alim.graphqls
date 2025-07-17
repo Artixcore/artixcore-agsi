@@ -1,0 +1,347 @@
+type Query {
+    alimStatus: AlimStatus!
+    alimMetrics: AlimMetrics!
+    researchHistory(sessionId: String!): [ResearchSession!]!
+}
+
+type Mutation {
+    analyzeResearch(input: NeuroResearchInput!): NeuroResearchResponse!
+    findResearchGaps(input: ResearchGapInput!): ResearchGapResponse!
+    peerReview(input: AutoReviewerInput!): AutoReviewerResponse!
+    generateHypotheses(input: HypothesisForgeInput!): HypothesisForgeResponse!
+    designExperiment(input: ExperimentDesignInput!): ExperimentDesignResponse!
+    generateCitationMesh(input: CitationMeshInput!): CitationMeshResponse!
+    predictImpact(input: ImpactPredictionInput!): ImpactPredictionResponse!
+    deepKnowledgeAnalysis(input: IslamicKnowledgeInput!): IslamicKnowledgeResponse!
+    independentReasoning(input: IjtihadInput!): IjtihadResponse!
+    crossDisciplineLink(input: CrossDisciplineInput!): CrossDisciplineResponse!
+    createResearchStrategy(input: ResearchStrategyInput!): ResearchStrategyResponse!
+}
+
+type Subscription {
+    neuroResearchStream(sessionId: String!): NeuroResearchChunk!
+    peerReviewStream(sessionId: String!): PeerReviewChunk!
+    hypothesisGenerationStream(sessionId: String!): HypothesisChunk!
+    citationMeshStream(sessionId: String!): CitationMeshChunk!
+    islamicKnowledgeStream(sessionId: String!): IslamicKnowledgeChunk!
+    crossDisciplineStream(sessionId: String!): CrossDisciplineChunk!
+}
+
+type AlimStatus {
+    agent: String!
+    version: String!
+    status: String!
+    description: String!
+    capabilities: [String!]!
+    inspiration: String!
+    uptime: Long!
+}
+
+type AlimMetrics {
+    totalRequests: Long!
+    successfulRequests: Long!
+    failedRequests: Long!
+    successRate: Float!
+    requestsByType: [RequestTypeMetric!]!
+    researchDomains: [DomainMetric!]!
+    islamicKnowledgeRequests: [IslamicKnowledgeMetric!]!
+    agentInfo: AgentInfo!
+}
+
+type AgentInfo {
+    name: String!
+    inspiration: String!
+    capabilities: Int!
+    status: String!
+}
+
+type RequestTypeMetric {
+    type: String!
+    count: Long!
+}
+
+type DomainMetric {
+    domain: String!
+    count: Long!
+}
+
+type IslamicKnowledgeMetric {
+    type: String!
+    count: Long!
+}
+
+input NeuroResearchInput {
+    researchText: String!
+    disciplines: [String!]!
+    analysisDepth: String = "comprehensive"
+    includeCrossDiscipline: Boolean = true
+    includeEmergentPatterns: Boolean = true
+}
+
+type NeuroResearchResponse {
+    success: Boolean!
+    analysis: String
+    disciplinesAnalyzed: [String!]!
+    analysisDepth: String!
+    crossDisciplineInsights: String
+    emergentPatterns: String
+    timestamp: Long!
+    error: String
+}
+
+input ResearchGapInput {
+    domain: String!
+    keywords: [String!]!
+    timeframe: String = "5_years"
+    includeEmergentGaps: Boolean = true
+    includeFundingOpportunities: Boolean = true
+}
+
+type ResearchGapResponse {
+    success: Boolean!
+    researchGaps: String
+    domain: String!
+    timeframe: String!
+    emergentGaps: String
+    fundingOpportunities: String
+    timestamp: Long!
+    error: String
+}
+
+input AutoReviewerInput {
+    paperContent: String!
+    journalStandards: String = "high_impact"
+    reviewFocus: [String!]!
+    includeLogicFlaws: Boolean = true
+    includeCitationAnalysis: Boolean = true
+    includeBiasDetection: Boolean = true
+}
+
+type AutoReviewerResponse {
+    success: Boolean!
+    review: String
+    journalStandards: String!
+    logicFlaws: String
+    citationIssues: String
+    biasDetection: String
+    recommendations: String
+    timestamp: Long!
+    error: String
+}
+
+input HypothesisForgeInput {
+    problemStatement: String!
+    domain: String!
+    hypothesisCount: Int = 5
+    includeExperimentDesign: Boolean = true
+    includeGrantWorthiness: Boolean = true
+    includeFeasibilityScoring: Boolean = true
+}
+
+type HypothesisForgeResponse {
+    success: Boolean!
+    hypotheses: String
+    problemStatement: String!
+    domain: String!
+    experimentDesigns: String
+    grantWorthinessScores: String
+    feasibilityScores: String
+    timestamp: Long!
+    error: String
+}
+
+input ExperimentDesignInput {
+    hypothesis: String!
+    researchDomain: String!
+    experimentType: String = "controlled"
+    includeMethodology: Boolean = true
+    includeStatisticalAnalysis: Boolean = true
+    includeTimeline: Boolean = true
+}
+
+type ExperimentDesignResponse {
+    success: Boolean!
+    experimentDesign: String
+    hypothesis: String!
+    methodology: String
+    statisticalAnalysis: String
+    timeline: String
+    timestamp: Long!
+    error: String
+}
+
+input CitationMeshInput {
+    researchPaper: String!
+    relatedPapers: [String!]
+    timeRange: String = "10_years"
+    includeInfluenceTracking: Boolean = true
+    includeImpactPrediction: Boolean = true
+    includeCrossDisciplineCitations: Boolean = true
+}
+
+type CitationMeshResponse {
+    success: Boolean!
+    citationMesh: String
+    researchPaper: String!
+    influenceTracking: String
+    impactPrediction: String
+    crossDisciplineCitations: String
+    timestamp: Long!
+    error: String
+}
+
+input ImpactPredictionInput {
+    researchWork: String!
+    predictionTimeframe: String = "5_years"
+    includeAcademicImpact: Boolean = true
+    includeSocietalImpact: Boolean = true
+    includeEconomicImpact: Boolean = true
+    includeCrossDisciplineImpact: Boolean = true
+}
+
+type ImpactPredictionResponse {
+    success: Boolean!
+    impactPrediction: String
+    researchWork: String!
+    academicImpact: String
+    societalImpact: String
+    economicImpact: String
+    crossDisciplineImpact: String
+    timestamp: Long!
+    error: String
+}
+
+input IslamicKnowledgeInput {
+    researchTopic: String!
+    knowledgeDepth: String = "comprehensive"
+    includeSpiritual: Boolean = true
+    includeTawhidicWorldview: Boolean = true
+    includeClassicalEpistemology: Boolean = true
+    includeModernIntegration: Boolean = true
+}
+
+type IslamicKnowledgeResponse {
+    success: Boolean!
+    deepKnowledgeAnalysis: String
+    researchTopic: String!
+    spiritualInsights: String
+    tawhidicPerspective: String
+    classicalEpistemology: String
+    modernIntegration: String
+    timestamp: Long!
+    error: String
+}
+
+input IjtihadInput {
+    researchQuestion: String!
+    sources: [String!]
+    reasoningMethod: String = "analytical"
+    includeHistoricalContext: Boolean = true
+    includeContemporaryApplication: Boolean = true
+    includeEthicalConsiderations: Boolean = true
+}
+
+type IjtihadResponse {
+    success: Boolean!
+    independentReasoning: String
+    researchQuestion: String!
+    historicalContext: String
+    contemporaryApplication: String
+    ethicalConsiderations: String
+    timestamp: Long!
+    error: String
+}
+
+input CrossDisciplineInput {
+    primaryDiscipline: String!
+    secondaryDiscipline: String!
+    researchQuestion: String!
+    includeMetaphysicalConnections: Boolean = true
+    includePracticalApplications: Boolean = true
+    includeTheoreticalFrameworks: Boolean = true
+}
+
+type CrossDisciplineResponse {
+    success: Boolean!
+    crossDisciplineAnalysis: String
+    primaryDiscipline: String!
+    secondaryDiscipline: String!
+    metaphysicalConnections: String
+    practicalApplications: String
+    theoreticalFrameworks: String
+    timestamp: Long!
+    error: String
+}
+
+input ResearchStrategyInput {
+    researchGoal: String!
+    targetDomains: [String!]!
+    timeline: String = "3_years"
+    includeFundingStrategy: Boolean = true
+    includeCollaborationOpportunities: Boolean = true
+    includePublicationStrategy: Boolean = true
+}
+
+type ResearchStrategyResponse {
+    success: Boolean!
+    researchStrategy: String
+    researchGoal: String!
+    targetDomains: [String!]!
+    fundingStrategy: String
+    collaborationOpportunities: String
+    publicationStrategy: String
+    timestamp: Long!
+    error: String
+}
+
+type ResearchSession {
+    id: String!
+    sessionType: String!
+    researchTopic: String!
+    timestamp: Long!
+    duration: Long!
+}
+
+type NeuroResearchChunk {
+    content: String!
+    progress: Int!
+    done: Boolean!
+    timestamp: Long!
+}
+
+type PeerReviewChunk {
+    content: String!
+    progress: Int!
+    done: Boolean!
+    timestamp: Long!
+}
+
+type HypothesisChunk {
+    content: String!
+    progress: Int!
+    done: Boolean!
+    timestamp: Long!
+}
+
+type CitationMeshChunk {
+    content: String!
+    progress: Int!
+    done: Boolean!
+    timestamp: Long!
+}
+
+type IslamicKnowledgeChunk {
+    content: String!
+    progress: Int!
+    done: Boolean!
+    timestamp: Long!
+}
+
+type CrossDisciplineChunk {
+    content: String!
+    progress: Int!
+    done: Boolean!
+    timestamp: Long!
+}
+
+scalar Long 
